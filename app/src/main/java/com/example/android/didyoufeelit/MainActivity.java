@@ -65,6 +65,11 @@ public class MainActivity extends AppCompatActivity {
         //return Event object
         @Override
         protected Event doInBackground(String... strings) {
+
+            //Handling the null cases
+            if (strings.length < 1 || strings[0] == null){
+                return null;
+        }
             Event earthquake = Utils.fetchEarthquakeData(strings[0]);
             return earthquake;
         }
@@ -73,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
         //Calls method updateUi to update the UI with event as arguement
         @Override
         protected void onPostExecute(Event event) {
+
+            //Checking if returned value of doInBackground is null
+            if(event==null){
+                return;}
+
             updateUi(event);
         }
     }
